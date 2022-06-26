@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FiChevronDown, FiChevronUp, FiCalendar } from 'react-icons/fi';
 import Label, { LabelProps } from '../label/Label';
 import TitleEditable from '../titleEditable/TitleEtitable';
 
 const Container = styled.div`
   border-radius: 4px;
-  border: solid 1px #95959557;
+  border: solid 1px ${(props) => props.theme.colors.border};
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   padding: 20px;
+  font-family: ${(props) => props.theme.fontFamily};
+  box-sizing: border-box;
+  background: ${(props) => props.theme.colors.backgroundSecundary};
 `;
 
 const Wrapper = styled.div`
@@ -23,15 +28,53 @@ const Wrapper = styled.div`
 const LabelContainer = styled.div`
   display: inline-block;
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 0;
 `;
 
+const ExpandIcon = styled(FiChevronDown)`
+  font-size: 2rem;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const CompactIcon = styled(FiChevronUp)`
+  font-size: 2rem;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const CalendarIcon = styled(FiCalendar)`
+  font-size: 1rem;
+  color: ${(props) => props.theme.colors.gray};
+  margin-right: 5px;
+`;
+
+const InfoContainer = styled.p`
+  color: ${(props) => props.theme.colors.gray};
+  font-size: 1rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+`;
+
+const DetailsWrapper = styled.div`
+  width: 100%;
+  p {
+    line-height: 1.5;
+  }
+`;
+
 interface TaskProps {
-  id: string;
-  title: string;
-  label: LabelProps;
-  date: Date;
+  task: {
+    id: string;
+    title: string;
+    label: LabelProps;
+    date: Date;
+    details: string;
+  };
 }
 
 interface TaskState {
@@ -47,21 +90,42 @@ class Task extends React.Component<TaskProps, TaskState> {
   }
 
   expandTask = (): void => {
-    const { expand } = this.state;
-    console.log(expand);
+    this.setState((state) => ({
+      ...state,
+      expand: !state.expand
+    }));
   };
 
   render(): React.ReactNode {
-    const { id, title, label, date } = this.props;
+    const { task } = this.props;
+    const { expand } = this.state;
     return (
-      <Container id={id} onClick={this.expandTask}>
+      <Container id={task.id}>
         <Wrapper>
-          <TitleEditable defaultTitle={title} />
-          <p>{date.toISOString()}</p>
+          <TitleEditable defaultTitle={task.title} />
+          <InfoContainer>
+            <CalendarIcon />
+            {task.date.toLocaleString()}
+          </InfoContainer>
           <LabelContainer>
-            <Label name={label.name} color={label.color} />
+            <Label name={task.label.name} color={task.label.color} />
           </LabelContainer>
         </Wrapper>
+        {expand ? (
+          <>
+            <div>
+              <CompactIcon onClick={this.expandTask} />
+            </div>
+            <DetailsWrapper>
+              <h3>Details:</h3>
+              <p>{task.details}</p>
+            </DetailsWrapper>
+          </>
+        ) : (
+          <div>
+            <ExpandIcon onClick={this.expandTask} />
+          </div>
+        )}
       </Container>
     );
   }

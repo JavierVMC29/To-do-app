@@ -12,7 +12,7 @@ const themes = {
 };
 
 export const SetThemeContext = React.createContext<any>('');
-export const CurrentThemeContext = React.createContext<any>('');
+export const CurrentThemeContext = React.createContext<string>('');
 
 function App(): JSX.Element {
   const [theme, setTheme] = useState('light');

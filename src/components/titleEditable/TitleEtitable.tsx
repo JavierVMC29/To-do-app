@@ -6,7 +6,7 @@ const Container = styled.input`
   background: transparent;
   color: ${(props) => props.theme.colors.text};
   padding: 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   font-family: ${(props) => props.theme.fontFamily};
 

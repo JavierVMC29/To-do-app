@@ -3,10 +3,17 @@ import styled from 'styled-components';
 import { CurrentThemeContext, SetThemeContext } from '../../App';
 import Toggle from '../../components/toggle/Toggle';
 
-const Container = styled.main``;
+const Container = styled.main`
+  min-height: 100vh;
+  background: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Title = styled.h1`
-  color: #000;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 function Settings(): JSX.Element {

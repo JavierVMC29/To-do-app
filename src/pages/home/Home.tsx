@@ -96,6 +96,7 @@ const task1 = {
     name: 'Personal',
     color: '#D3586E'
   },
+  priority: 'high',
   details:
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ad natus corporis illo culpa exercitationem fugiat. Quis optio unde commodi sint ut molestias quas non omnis ducimus quaerat culpa eum dolor numquam suscipit minus atque animi tempore maxime, autem provident voluptas, necessitatibus perspiciatis voluptates! Perferendis voluptatum nesciunt sint, cum soluta repudiandae quod quae quas tenetur quidem aspernatur dolores asperiores officiis, labore fugit natus facere commodi. Accusamus itaque nesciunt distinctio autem eligendi. Veritatis voluptatem autem impedit obcaecati ratione dolorem harum, in praesentium beatae ullam nulla aut odit nostrum optio vero, dolore, necessitatibus amet earum sequi sit. Velit, ea! Consequuntur, veniam ea!'
 };
@@ -108,6 +109,7 @@ const task2 = {
     name: 'Personal',
     color: '#A762DD'
   },
+  priority: 'low',
   details:
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ad natus corporis illo culpa exercitationem fugiat. Quis optio unde commodi sint ut molestias quas non omnis ducimus quaerat culpa eum dolor numquam suscipit minus atque animi tempore maxime, autem provident voluptas, necessitatibus perspiciatis voluptates! Perferendis voluptatum nesciunt sint, cum soluta repudiandae quod quae quas tenetur quidem aspernatur dolores asperiores officiis, labore fugit natus facere commodi. Accusamus itaque nesciunt distinctio autem eligendi. Veritatis voluptatem autem impedit obcaecati ratione dolorem harum, in praesentium beatae ullam nulla aut odit nostrum optio vero, dolore, necessitatibus amet earum sequi sit. Velit, ea! Consequuntur, veniam ea!'
 };

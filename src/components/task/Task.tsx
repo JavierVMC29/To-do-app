@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FiChevronDown, FiChevronUp, FiCalendar } from 'react-icons/fi';
 import Label, { LabelProps } from '../label/Label';
 import TitleEditable from '../titleEditable/TitleEtitable';
+import Checkbox from '../checkbox/Checkbox';
 
 const Container = styled.div`
   border-radius: 4px;
@@ -12,10 +13,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-height: 200px;
   padding: 20px;
   font-family: ${(props) => props.theme.fontFamily};
   box-sizing: border-box;
   background: ${(props) => props.theme.colors.backgroundSecundary};
+  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -58,6 +61,11 @@ const InfoContainer = styled.p`
   display: flex;
   justify-content: left;
   align-items: center;
+  margin-bottom: 0;
+  span {
+    font-weight: 500;
+    margin-right: 5px;
+  }
 `;
 
 const DetailsWrapper = styled.div`
@@ -73,6 +81,7 @@ interface TaskProps {
     title: string;
     label: LabelProps;
     date: Date;
+    priority: string;
     details: string;
   };
 }
@@ -101,11 +110,16 @@ class Task extends React.Component<TaskProps, TaskState> {
     const { expand } = this.state;
     return (
       <Container id={task.id}>
+        <Checkbox />
         <Wrapper>
           <TitleEditable defaultTitle={task.title} />
           <InfoContainer>
             <CalendarIcon />
             {task.date.toLocaleString()}
+          </InfoContainer>
+          <InfoContainer>
+            <span>Priority:</span>
+            {task.priority}
           </InfoContainer>
           <LabelContainer>
             <Label name={task.label.name} color={task.label.color} />

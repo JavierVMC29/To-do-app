@@ -1,28 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FiPlus, FiCheck, FiTrash } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 
 import Task from '../../components/task/Task';
 import Button from '../../components/button/Button';
+import TaskManager from '../../components/taskManager/TaskManager';
 
 const PlusIcon = styled(FiPlus)`
   color: #fff;
   font-weight: bold;
-  font-size: 1rem;
-  margin-right: 5px;
-`;
-
-const CheckIcon = styled(FiCheck)`
-  color: ${(props) => props.theme.colors.text};
-  font-weight: 500;
-  font-size: 1rem;
-  margin-right: 5px;
-`;
-
-const TrashIcon = styled(FiTrash)`
-  color: ${(props) => props.theme.colors.text};
-  font-weight: 500;
   font-size: 1rem;
   margin-right: 5px;
 `;
@@ -127,19 +114,12 @@ function Home(): JSX.Element {
             </Button>
           </div>
           <div>
-            <Button color="#62DDBF00">
-              <CheckIcon />
-              Mark tasks
-            </Button>
-            <Button color="#DD627800">
-              <TrashIcon />
-              Delete tasks
-            </Button>
+            <TaskManager />
           </div>
         </OptionsContainer>
         <TasksContainer>
-          <Task task={task1} />
-          <Task task={task2} />
+          <Task task={task1} showCheckbox={false} />
+          <Task task={task2} showCheckbox={false} />
         </TasksContainer>
       </ContentContainer>
     </Container>

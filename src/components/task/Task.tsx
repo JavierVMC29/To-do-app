@@ -75,6 +75,12 @@ const DetailsWrapper = styled.div`
   }
 `;
 
+const CheckInput = styled.div`
+  position: absolute;
+  left: -40px;
+  top: 88px;
+`;
+
 interface TaskProps {
   task: {
     id: string;
@@ -84,6 +90,7 @@ interface TaskProps {
     priority: string;
     details: string;
   };
+  showCheckbox: boolean;
 }
 
 interface TaskState {
@@ -106,11 +113,13 @@ class Task extends React.Component<TaskProps, TaskState> {
   };
 
   render(): React.ReactNode {
-    const { task } = this.props;
+    const { task, showCheckbox } = this.props;
     const { expand } = this.state;
     return (
       <Container id={task.id}>
-        <Checkbox />
+        <CheckInput>
+          <Checkbox show={showCheckbox} />
+        </CheckInput>
         <Wrapper>
           <TitleEditable defaultTitle={task.title} />
           <InfoContainer>

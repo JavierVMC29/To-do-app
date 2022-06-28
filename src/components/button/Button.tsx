@@ -20,10 +20,16 @@ const Container = styled.button`
 interface ButtonProps {
   children: any;
   color: string;
+  // eslint-disable-next-line react/require-default-props
+  action?: () => void;
 }
 
-function Button({ color, children }: ButtonProps): JSX.Element {
-  return <Container color={color}>{children}</Container>;
+function Button({ color, children, action }: ButtonProps): JSX.Element {
+  return (
+    <Container color={color} onClick={action}>
+      {children}
+    </Container>
+  );
 }
 
 export default Button;

@@ -3,16 +3,14 @@ import styled from 'styled-components';
 
 const Container = styled.span`
   position: absolute;
-  left: -40px;
-  top: 88px;
-  :hover {
-    cursor: pointer;
-  }
-  height: 24px;
   width: 24px;
+  height: 24px;
   background-color: #fff;
   border-radius: 5px;
   border: solid 1px #000;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Input = styled.input`
@@ -32,12 +30,16 @@ const Checkmark = styled.span`
   border-radius: 5px;
 `;
 
+interface CheckboxProps {
+  show: boolean;
+}
+
 interface CheckboxState {
   checked: boolean;
 }
 
-class Checkbox extends React.Component<any, CheckboxState> {
-  constructor(props: any) {
+class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
+  constructor(props: CheckboxProps) {
     super(props);
     this.state = {
       checked: false
@@ -50,9 +52,13 @@ class Checkbox extends React.Component<any, CheckboxState> {
   };
 
   render(): React.ReactNode {
+    const { show } = this.props;
     const { checked } = this.state;
     return (
-      <Container onClick={this.check}>
+      <Container
+        onClick={this.check}
+        style={{ display: show ? 'block' : 'none' }}
+      >
         <Input type="checkbox" defaultChecked={checked} />
         {checked ? <Checkmark /> : ''}
       </Container>

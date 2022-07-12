@@ -10,7 +10,7 @@ const Container = styled.div`
   border: solid 1px ${(props) => props.theme.colors.border};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   min-height: 200px;

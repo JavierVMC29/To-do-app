@@ -1,11 +1,21 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
 
 import { FiPlus } from 'react-icons/fi';
 
+// Interfaces
+import { LabelProps } from '../../components/label/Label';
+
+// Hooks
+import useFetch from '../../hooks/useFetch';
+
+// Components
 import Task from '../../components/task/Task';
 import Button from '../../components/button/Button';
 import TaskManager from '../../components/taskManager/TaskManager';
+
+// Styles
 
 const PlusIcon = styled(FiPlus)`
   color: #fff;
@@ -75,33 +85,21 @@ const TasksContainer = styled.section`
   gap: 30px;
 `;
 
-const task1 = {
-  id: '1',
-  title: 'Terminar prototipo',
-  date: new Date(),
-  label: {
-    name: 'Personal',
-    color: '#D3586E'
-  },
-  priority: 'high',
-  details:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ad natus corporis illo culpa exercitationem fugiat. Quis optio unde commodi sint ut molestias quas non omnis ducimus quaerat culpa eum dolor numquam suscipit minus atque animi tempore maxime, autem provident voluptas, necessitatibus perspiciatis voluptates! Perferendis voluptatum nesciunt sint, cum soluta repudiandae quod quae quas tenetur quidem aspernatur dolores asperiores officiis, labore fugit natus facere commodi. Accusamus itaque nesciunt distinctio autem eligendi. Veritatis voluptatem autem impedit obcaecati ratione dolorem harum, in praesentium beatae ullam nulla aut odit nostrum optio vero, dolore, necessitatibus amet earum sequi sit. Velit, ea! Consequuntur, veniam ea!'
-};
+interface TaskType {
+  id: string;
+  title: string;
+  label: LabelProps;
+  date: Date;
+  priority: string;
+  details: string;
+}
 
-const task2 = {
-  id: '2',
-  title: 'Implementar prototipo de Figma en React',
-  date: new Date(),
-  label: {
-    name: 'Personal',
-    color: '#A762DD'
-  },
-  priority: 'low',
-  details:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ad natus corporis illo culpa exercitationem fugiat. Quis optio unde commodi sint ut molestias quas non omnis ducimus quaerat culpa eum dolor numquam suscipit minus atque animi tempore maxime, autem provident voluptas, necessitatibus perspiciatis voluptates! Perferendis voluptatum nesciunt sint, cum soluta repudiandae quod quae quas tenetur quidem aspernatur dolores asperiores officiis, labore fugit natus facere commodi. Accusamus itaque nesciunt distinctio autem eligendi. Veritatis voluptatem autem impedit obcaecati ratione dolorem harum, in praesentium beatae ullam nulla aut odit nostrum optio vero, dolore, necessitatibus amet earum sequi sit. Velit, ea! Consequuntur, veniam ea!'
-};
-
+/**
+ * Component to be displayed in the main page
+ * @returns JSX.Element
+ */
 function Home(): JSX.Element {
+  const { data, error } = useFetch<TaskType[]>('http://localhost:5000/tasks');
   return (
     <Container>
       <ContentContainer>
@@ -118,8 +116,15 @@ function Home(): JSX.Element {
           </div>
         </OptionsContainer>
         <TasksContainer>
-          <Task task={task1} showCheckbox={false} />
-          <Task task={task2} showCheckbox={false} />
+          {error ? <p>An error ocurred</p> : ''}
+          {!data ? <p>Loading...</p> : ''}
+          {data
+            ? data.map((d: any) => {
+              const { _id: id, title, label, date, priority, details } = d;
+              const task = { id, title, label, date, priority, details };
+              return <Task key={id} task={task} showCheckbox={false} />;
+            })
+            : ''}
         </TasksContainer>
       </ContentContainer>
     </Container>
